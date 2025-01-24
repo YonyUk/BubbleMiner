@@ -1,0 +1,4 @@
+*.meta
+Scenes/
+Scripts/*.meta
+*.asset
