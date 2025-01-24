@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Variables;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     Camera mainCamera;
+    public float speed;
     private void Move(){
         float inputHorizontal = Input.GetAxis("Horizontal");
         float inputVertical = Input.GetAxis("Vertical");
@@ -13,8 +14,10 @@ public class NewBehaviourScript : MonoBehaviour
 
         Matrix4x4 matrix = Matrix4x4.Rotate(Quaternion.Euler(0,45,0));
         Vector3 fixedDirection = matrix.MultiplyVector(direction);  
-        direction.Normalize();
-        GetComponent<CharacterController>().Move(fixedDirection * 4 * Time.deltaTime);
+        fixedDirection.Normalize();
+        if(Input.GetKey(KeyCode.LeftShift)) speed = 2.8f;
+        else speed = 1.5f;
+        GetComponent<CharacterController>().Move(fixedDirection * 4 * Time.deltaTime * speed);
 
     }
     
@@ -27,7 +30,7 @@ public class NewBehaviourScript : MonoBehaviour
             direction.y = 0;
         }
         else {
-            direction = Vector3.forward;
+            direction = Vector3.forward ;
         }
 
         transform.forward = direction;
@@ -36,6 +39,7 @@ public class NewBehaviourScript : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
+        speed = 1.5f;
     } 
 
 
