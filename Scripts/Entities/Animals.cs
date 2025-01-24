@@ -8,7 +8,7 @@ public class Animals : MonoBehaviour
     public int Aggressive;
     public IResource Food;
     public IEqquipable Bait;
-    public bool Flag = false;//Bandera para indicar al game controler que el animal va al ataque
+    public bool Attaking = false;//Bandera para indicar al game controler que el animal va al ataque
 
     private bool Attack(IEqquipable bait = null){
         //Falta el aumento de agresividad del bait
@@ -28,11 +28,12 @@ public class Animals : MonoBehaviour
         }
         return false;
     }
-    void OnCollisionEnter2D(Collision2D other)
+    //Falta el Drop De jama
+    void OnCollisionEnter(Collision other)
     {
         IEqquipable bait = other.gameObject.GetComponent<IEqquipable>();
         if(Attack(bait)){
-            Flag = true;
+            Attaking = true;
         }
     }
 }
