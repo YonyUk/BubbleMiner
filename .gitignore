@@ -1,0 +1,4 @@
+*.meta
+Scripts/*meta
+Scripts/Architecture/*.meta
+
