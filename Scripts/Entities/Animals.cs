@@ -10,7 +10,7 @@ public class Animals : MonoBehaviour
     public IEqquipable Bait;
     public bool Attaking = false;//Bandera para indicar al game controler que el animal va al ataque
 
-    private bool Attack(IEqquipable bait = null){
+    private bool Attack(IEqquipable bait){
         //Falta el aumento de agresividad del bait
         int regulator = 11;
         if(bait != null && Atracted(bait)){
