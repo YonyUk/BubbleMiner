@@ -1,11 +1,12 @@
 using UnityEngine;
 using Architecture.Resource;
+using Resources = Architecture.Resource.Resources;
 
 namespace Architecture.Structures{
-    public interface IStructure
+    public interface IStructure<T>
     {
-        IResource Material{get; }
-        T Produce<T>();
+        Resources Material{get; }
+        T Produce();
         void AddResource(IResource resource);
     }
 }
