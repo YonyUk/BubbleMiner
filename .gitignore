@@ -1,4 +1,6 @@
 *.meta
 Scripts/*meta
 Scripts/Architecture/*.meta
-
+Scenes/
+Scripts/*.meta
+*.asset
