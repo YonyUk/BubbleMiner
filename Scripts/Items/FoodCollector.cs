@@ -29,7 +29,8 @@ public class FoodCollector : MonoBehaviour, IEqquipable
             while(collectDelay <= secondsToCollect){
                 collectDelay += Time.deltaTime;
             }
-            occupied = Math.Min(target.GetComponent<Animals>().Food.Units + occupied, storage);
+            int extracted = UnityEngine.Random.Range(4, target.GetComponent<Animals>().Food.Units + 1);
+            occupied = Math.Min(extracted + occupied, storage);
             target.GetComponent<Animals>().Food = null;
         }
     }
@@ -49,8 +50,8 @@ public class FoodCollector : MonoBehaviour, IEqquipable
     }
     void Start()
     {
-        storage = Globals.bubbleStorageCapacity;
-        secondsToCollect = 8;
+        storage = Globals.foodStorageCapacity;
+        secondsToCollect = 5;
     }
 
     // Update is called once per frame

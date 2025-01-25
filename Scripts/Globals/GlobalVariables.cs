@@ -7,6 +7,7 @@ namespace Variables{
         public static string playerTag = "Player";
         public static string plantsTag = "OxigenPlants";
         public static string animalTag = "Animal";
+        public static string harpoonlTag = "Harpoon";
         public static int bubbleStorageCapacity = 10;
         public static int foodStorageCapacity = 10;
         public static int BubblesProduceControler = 2;
