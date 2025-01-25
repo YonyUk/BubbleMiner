@@ -3,20 +3,20 @@ using Architecture.Resource;
 
 public class Plants : MonoBehaviour
 {
+    public int units;
     public IResource Oxygen;
-
-    private int maxCapacity;
     private int counter;
 
     void GenerateOxygen(){
         if(Oxygen == null){
-           // Oxygen = new
+           Oxygen = new Oxigen(1);
         }
-    }
+        else if(Oxygen.Units < units) Oxygen = new Oxigen(Oxygen.Units + 1);
+        
+    }   
 
     void Start(){
-        maxCapacity = Oxygen.Units;
-        //Oxygen = new 
+        Oxygen = new Oxigen(units);
     }
     void FixedUpdate(){
         if(counter == 1000){

@@ -28,8 +28,8 @@ public class Animals : MonoBehaviour
         }
         return false;
     }
-    //Falta el Drop De jama
-    void OnCollisionEnter(Collision other)
+    
+    void OnTriggerEnter(Collider other)
     {
         IEqquipable bait = other.gameObject.GetComponent<IEqquipable>();
         if(Attack(bait)){
