@@ -4,14 +4,3 @@ Scripts/Architecture/*.meta
 Scenes/
 Scripts/*.meta
 *.asset
-LightConfig/*.meta
-Materials/*.meta
-Models/*.meta
-Models/Arpon/*.meta
-Models/Bag/*.meta
-Models/bob/*.meta
-Models/Gun/*.meta
-Models/Peces/*.meta
-Packages/*.meta
-UserSettings/*.meta
-UserSettings/Layout/*.meta
