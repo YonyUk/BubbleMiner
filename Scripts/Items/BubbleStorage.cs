@@ -2,27 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using Architecture.Eqquipables;
 using UnityEngine;
+using Variables;
 
-public class NewBehaviourScript : MonoBehaviour, IEqquipable
+
+public class BubbleCollector : MonoBehaviour, IEqquipable
 {
     public string Name => "BubbleCollector";
-    public int secondsToCollect;
-    GameObject backpack;
-
+    public int storage {get; private set;}
+    int occupied {get; set;} = 0;
+    
+ 
     public void Upgrade()
     {
-        secondsToCollect -= 2;
+        storage += 4;
     }
 
     public void Use()
     {
-        
+        occupied ++;
     }
 
     void Start()
     {
-        secondsToCollect = 8;
-        //backpack = this.GetComponentInParent<
+        storage = Globals.bubbleStorageCapacity;
     }
 
     // Update is called once per frame
@@ -30,6 +32,4 @@ public class NewBehaviourScript : MonoBehaviour, IEqquipable
     {
         
     }
-
-
 }

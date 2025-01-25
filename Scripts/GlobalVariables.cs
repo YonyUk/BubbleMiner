@@ -5,8 +5,8 @@ namespace Variables{
 
     public static class Globals{
         public static string playerTag = "Player";
-        public static int bubbleColletorStorage = 10;
-        public static int foodColletorStorage = 10;
+        public static int bubbleStorageCapacity = 10;
+        public static int foodStorageCapacity = 10;
 
     }
 
