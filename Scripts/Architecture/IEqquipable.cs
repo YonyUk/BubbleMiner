@@ -6,5 +6,6 @@ namespace Architecture.Eqquipables{
 		void Use();
 		void Upgrade();
 		string Name { get; }
+		bool CanUse { get; }
 	}
 }
