@@ -1,26 +1,33 @@
 using System.Collections.Generic;
-using Architecture.Resource;
 using Architecture.Structures;
+using Unity.VisualScripting;
 using UnityEngine;
+using Variables;
+using IResource = Architecture.Resource.IResource;
+using Resources = Architecture.Resource.Resources;
 
 public class City : MonoBehaviour
 {
     public List<GameObject> StructPrefabs;
-    public IStructure<Satisfaction> Alcaldia;
-    public IStructure<Oxigen>Bubble;
-    public IStructure<Food> Food;
-    public IStructure<People> Condo;
+    public AlmacenDeBurbujas almacenDeBurbujas;
+    public AlmacenDeComida almacenDeComida;
+    public Alcaldia alcaldia;
+    public Condominio condo;
     public List<IStructure<IResource>> structures;
     Dictionary<IResource,int>materials;
     void Start()
     {
-        StructPrefabs = new List<GameObject>();
         materials = new Dictionary<IResource, int>();
-        structures = new List<IStructure<IResource>>();
-        structures.Add((IStructure<IResource>)Alcaldia);
-        structures.Add((IStructure<IResource>)Bubble);
-        structures.Add((IStructure<IResource>)Food);
-        structures.Add((IStructure<IResource>)Condo);
+        int radius = 0;
+        int angle = 0;
+        int cont = 0;
+        while(cont < 12)
+        {
+            AddSpawnZone(angle,radius);
+            angle+=60;
+            radius += Globals.VectorNormalizer;
+            cont++;
+        }
     }
 
     void Update()
@@ -41,11 +48,20 @@ public class City : MonoBehaviour
         int n = 0;
         foreach (var item in materials)
         {
-            if(item.Key.Type == Architecture.Resource.Resources.Satisfaccion){
+            if(item.Key.Type == Resources.Satisfaccion){
                 n += item.Key.Units*item.Value;
                 materials.Remove(item.Key);
             }
         }
         return new Satisfaction(n);
+    }
+    public void AddSpawnZone(int angle, int radius){
+        GameObject g = new GameObject();
+        g.AddComponent<SpawnStructure>();
+        SpawnStructure s = g.GetComponent<SpawnStructure>();
+        s.PrefabsStructs = StructPrefabs;
+        s.angle = angle;
+        s.radius = radius;
+        Instantiate(g,transform);
     }
 }

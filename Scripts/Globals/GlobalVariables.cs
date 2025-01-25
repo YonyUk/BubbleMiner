@@ -9,6 +9,7 @@ namespace Variables{
         public static int FoodProduceControler = 2;
         public static int PeopleProduceControle = 6;
         public static int RefreshStructureProduce = 10000;
+        public static int VectorNormalizer = 10;
     }
 
 }
