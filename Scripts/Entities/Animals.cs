@@ -6,11 +6,13 @@ public class Animals : MonoBehaviour
 {
     public int Damage;
     public int Aggressive;
+	public float Speed;
     public IResource Food;
     public IEqquipable Bait;
     public bool Attaking = false;//Bandera para indicar al game controler que el animal va al ataque
+	public int Life { get; private set; }
 
-    private bool Attack(IEqquipable bait){
+    private bool CanAttack(IEqquipable bait){
         //Falta el aumento de agresividad del bait
         int regulator = 11;
         if(bait != null && Atracted(bait)){
@@ -32,7 +34,7 @@ public class Animals : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         IEqquipable bait = other.gameObject.GetComponent<IEqquipable>();
-        if(Attack(bait)){
+        if(CanAttack(bait)){
             Attaking = true;
         }
     }
