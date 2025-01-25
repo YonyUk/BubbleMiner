@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'Minerio';
+    src: url('Minerio-SemiBold.eot');
+    src: local('Minerio Semi Bold'), local('Minerio-SemiBold'),
+        url('Minerio-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('Minerio-SemiBold.woff2') format('woff2'),
+        url('Minerio-SemiBold.woff') format('woff'),
+        url('Minerio-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Minerio';
+    src: url('Minerio-Regular.eot');
+    src: local('Minerio Regular'), local('Minerio-Regular'),
+        url('Minerio-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Minerio-Regular.woff2') format('woff2'),
+        url('Minerio-Regular.woff') format('woff'),
+        url('Minerio-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Minerio';
+    src: url('Minerio-Medium.eot');
+    src: local('Minerio Medium'), local('Minerio-Medium'),
+        url('Minerio-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Minerio-Medium.woff2') format('woff2'),
+        url('Minerio-Medium.woff') format('woff'),
+        url('Minerio-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Minerio';
+    src: url('Minerio-Light.eot');
+    src: local('Minerio Light'), local('Minerio-Light'),
+        url('Minerio-Light.eot?#iefix') format('embedded-opentype'),
+        url('Minerio-Light.woff2') format('woff2'),
+        url('Minerio-Light.woff') format('woff'),
+        url('Minerio-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Minerio';
+    src: url('Minerio-Bold.eot');
+    src: local('Minerio Bold'), local('Minerio-Bold'),
+        url('Minerio-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Minerio-Bold.woff2') format('woff2'),
+        url('Minerio-Bold.woff') format('woff'),
+        url('Minerio-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
