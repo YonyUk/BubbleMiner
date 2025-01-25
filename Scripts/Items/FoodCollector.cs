@@ -1,16 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Architecture.Eqquipables;
 using UnityEngine;
+using Variables;
 
-public class NewBehaviourScript : MonoBehaviour
+public class FoodCollector : MonoBehaviour, IEqquipable
 {
-    // Start is called before the first frame update
-    void Start()
+    public string Name => "FoodCollector";
+
+    public int storage {get; private set;}
+    int occupied {get; set;}
+
+    public void Upgrade()
     {
-        
+        storage += 4;
     }
 
-    // Update is called once per frame
+    public void Use()
+    {
+        occupied++;
+    }
+
+    void Start()
+    {
+        storage = Globals.foodStorageCapacity;
+    }
+
     void Update()
     {
         
