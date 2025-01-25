@@ -44,7 +44,7 @@ public class Animals : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         if(other.transform.CompareTag(Globals.harpoonlTag)){
-            TakeDamage(other.transform.GetComponent<Harpoon>().damage);
+            TakeDamage(other.transform.GetComponentInParent<Harpoon>().damage);
         }
     }
     void OnTriggerEnter(Collider other)
