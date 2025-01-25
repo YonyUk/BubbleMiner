@@ -10,6 +10,7 @@ namespace Variables{
         public static int bubbleStorageCapacity = 10;
         public static int foodStorageCapacity = 10;
         public static int BubblesProduceControler = 2;
+        public static int FoodProduceControler = 2;
     }
 
 }
