@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     public Animator anim;
     [HideInInspector]
     public bool moving;
+    public bool mining;
     public float MovementSpeed;
     Camera mainCamera;
     private void Move()
@@ -18,7 +19,7 @@ public class Movement : MonoBehaviour
         direction.Normalize();
 
         moving = direction.magnitude > 0;
-        if (!Input.GetMouseButton(0))
+        if (!mining)
             GetComponent<CharacterController>().Move(direction * MovementSpeed * Time.deltaTime);
 
     }
@@ -26,9 +27,12 @@ public class Movement : MonoBehaviour
     {
         anim.SetBool("run", moving);
 
-        anim.SetBool("mine", Input.GetMouseButton(0));
+        anim.SetBool("mine", mining);
     }
-
+    void Mining()
+    {
+        mining = Input.GetMouseButton(0);
+    }
     private void LookAtCursor()
     {
         var mousePos = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -48,8 +52,18 @@ public class Movement : MonoBehaviour
 
         // Suavizar el giro utilizando SmoothDamp
         Vector3 currentDirection = transform.forward;
-        Vector3 smoothDirection = Vector3.SmoothDamp(currentDirection, direction, ref currentVelocity, smoothTime);
-        transform.forward = smoothDirection;
+        if (mining)
+        {
+            Vector3 smoothDirection = Vector3.SmoothDamp(currentDirection, direction, ref currentVelocity, smoothTime + 2);
+            transform.forward = smoothDirection;
+
+        }
+        else
+        {
+            Vector3 smoothDirection = Vector3.SmoothDamp(currentDirection, direction, ref currentVelocity, smoothTime);
+            transform.forward = smoothDirection;
+
+        }
     }
 
     // Variables para SmoothDamp
@@ -67,8 +81,9 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Mining();
         Move();
-        AnimationHandler();
         LookAtCursor();
+        AnimationHandler();
     }
 }
