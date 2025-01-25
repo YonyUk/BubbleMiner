@@ -1,6 +1,12 @@
 *.meta
 Scripts/*meta
 Scripts/Architecture/*.meta
+Models/*.meta
+Models/Materials/*meta
 Scenes/
 Scripts/*.meta
 *.asset
+Models/Gun/*.meta
+Models/Gun/Materials/*.meta
+Models/Bob/*.meta
+Models/Bob/Materials/*.meta
