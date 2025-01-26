@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Architecture.Structures;
+using Unity.Burst.Intrinsics;
+
 //using Unity.VisualScripting;
 using UnityEngine;
 using Variables;
@@ -11,7 +13,14 @@ public class City : MonoBehaviour
     public List<GameObject> StructPrefabs;
     public List<IStructure> structures;
 	Alcaldia alcaldia { get; set; }
+    AlmacenDeBurbujas burbujas {get;set;}
+    AlmacenDeComida almacenDeComida{get;set;}
+    Condominio condominio {get;set;}
     Dictionary<IResource,int>materials;
+    public int oxigen = 20;
+    public int satisfaction = 100;
+    public int food=20;
+    public int people=5;    
     void Start()
     {
 		structures = new List<IStructure> ();
@@ -20,18 +29,39 @@ public class City : MonoBehaviour
         int angle = 0;
         int cont = 0;
 		alcaldia = ((GameObject)Instantiate (StructPrefabs [0], new Vector3 (), Quaternion.identity)).GetComponent<Alcaldia>();
+        burbujas = ((GameObject)Instantiate(StructPrefabs[1], new Vector3(),Quaternion.identity)).GetComponent<AlmacenDeBurbujas>();
+        almacenDeComida = ((GameObject)Instantiate(StructPrefabs[2],new Vector3(),Quaternion.identity)).GetComponent<AlmacenDeComida>();
+        condominio = ((GameObject)Instantiate(StructPrefabs[3],new Vector3(),Quaternion.identity)).GetComponent<Condominio>();
 		structures.Add (alcaldia);
-        while(cont < 12)
+        structures.Add(burbujas);
+        structures.Add(almacenDeComida);
+        structures.Add(condominio);
+        while(cont < 6)
         {
             AddSpawnZone(angle,radius);
             angle+=60;
-            radius += Globals.VectorNormalizer;
+            radius = Globals.VectorNormalizer;
             cont++;
         }
     }
-	void Meeting(Architecture.Resource.Resources type,int units){
-		Debug.Log(type);
-		Debug.Log (units);
+	void GetParams(Architecture.Resource.Resources type,int units){
+		switch(type)
+        {
+            case Resources.Oxygen:
+                oxigen += units;
+                break;
+            case Resources.Food:
+                food += units;
+                break;
+            case Resources.Satisfaccion:
+                satisfaction += units;
+                break;
+            case Resources.People:
+                people += units;
+                break;
+            default:
+                return;
+        }
 	}
     void Update()
     {
@@ -43,9 +73,18 @@ public class City : MonoBehaviour
             }
         }
         foreach(var i in structures){
-            i.Produce(Meeting);
+            i.Produce(GetParams);
             //materials[x] ++;
         }
+    }
+
+    public void NextDay()
+    {
+            oxigen -= people;
+            food -= people;
+            satisfaction -= people;
+            structures[4].AddResource(new People(people));
+            structures[4].Produce(GetParams);
     }
     public Satisfaction GetPoblationalHappiness(){
         int n = 0;
