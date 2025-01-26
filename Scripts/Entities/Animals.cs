@@ -10,6 +10,7 @@ public class Animals : MonoBehaviour
     public IResource Food;
     public IEqquipable Bait;
     public bool Attaking = false;//Bandera para indicar al game controler que el animal va al ataque
+	public bool Running = false;
 	public int Life { get; private set; }
 
     private bool CanAttack(IEqquipable bait){

@@ -20,7 +20,10 @@ public class FishBrain : Animals {
 		attack_target = new Vector3 (2, 0, 2);
 		counter = 1;
 	}
-
+	public void Runaway(){
+		Vector3 direction = transform.position - attack_target;
+		transform.Translate (direction.normalized * Speed);
+	}
 	public void LookAroundStaticPoint(){
 		if ((transform.position - temporal_point).magnitude < Globals.min_distance_to_contact && time_to_attack)
 			temporal_point = static_position + new Vector3 (random.Next (-1 * Globals.explore_range, Globals.explore_range), 0f, random.Next (-1 * Globals.explore_range, Globals.explore_range));
@@ -48,6 +51,8 @@ public class FishBrain : Animals {
 		counter ++;
 		if (Attaking)
 			Attack (attack_target);
+		else if (Running)
+			Runaway ();
 		else
 			LookAroundStaticPoint ();
 	}
