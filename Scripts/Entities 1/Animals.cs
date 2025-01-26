@@ -7,6 +7,7 @@ public class Animals : MonoBehaviour
 {
     public int Damage;
     public float Speed;
+    public bool Running = false;
     public int healthpoints;
     public int Aggressive;
     public IResource Food;
@@ -46,7 +47,7 @@ public class Animals : MonoBehaviour
     void Die()
     {
         Instantiate(food, transform.position, Quaternion.identity, null);
-        food.GetComponent<Meat>().unit = Food.Units;
+        //food.GetComponent<Meat>().unit = Food.Units;
         Destroy(gameObject);
     }
 

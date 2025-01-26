@@ -17,4 +17,9 @@ public class CameraController : MonoBehaviour
     {
         anim.SetBool("cup", cc.playerIn);
     }
+    public void Init()
+    {
+        print("init");
+        anim.SetTrigger("init");
+    }
 }

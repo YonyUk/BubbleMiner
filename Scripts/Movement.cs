@@ -6,6 +6,7 @@ using Architecture.Eqquipables;
 using Unity.VisualScripting;
 public class Movement : MonoBehaviour
 {
+    public static Movement mov;
 
     public IEqquipable gun;
     public int gunIndex = 0;
@@ -14,9 +15,11 @@ public class Movement : MonoBehaviour
     public Harpoon harpoon;
     public Drill drill;
     public bool shooting;
+
     public int oxygenStorage = 0;
     public int foodStorage = 0;
     public int drillStorage = 0;
+
     public Animator anim;
     [HideInInspector]
     public bool moving;
@@ -26,6 +29,19 @@ public class Movement : MonoBehaviour
     public float oxigen = 1;
     public float MultiOxigen = 1;
     bool pick;
+    public LayerMask layer;
+    void Awake()
+    {
+
+        if (!mov)
+        {
+            mov = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
     private void SwitchGun()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -50,6 +66,24 @@ public class Movement : MonoBehaviour
             }
         }
     }
+    void Died()
+    {
+        if (oxigen <= 0)
+        {
+            GetComponent<CharacterController>().enabled = false;
+
+            // Transportar el personaje a la coordenada (0, 0, 0)
+            transform.position = Vector3.zero;
+
+            // Reactivar el CharacterController
+            GetComponent<CharacterController>().enabled = true;
+            oxygenStorage = 0;
+            foodStorage = 0;
+            drillStorage = 0;
+            oxigen = 1;
+        }
+
+    }
     private void UpdateStorage()
     {
 
@@ -58,7 +92,7 @@ public class Movement : MonoBehaviour
 
 
     }
-    private bool InCity()
+    public bool InCity()
     {
         return capsuleController.capsula.playerIn;
     }
@@ -107,7 +141,7 @@ public class Movement : MonoBehaviour
     {
         var mousePos = mainCamera.ScreenPointToRay(Input.mousePosition);
         Vector3 direction = transform.forward;
-        if (Physics.Raycast(mousePos, out var hitInfo, Mathf.Infinity, 1))
+        if (Physics.Raycast(mousePos, out var hitInfo, Mathf.Infinity, layer))
         {
             if (hitInfo.transform.CompareTag(Globals.playerTag))
             {
@@ -122,6 +156,13 @@ public class Movement : MonoBehaviour
 
         // Suavizar el giro utilizando SmoothDamp
         Vector3 currentDirection = transform.forward;
+        if (shooting)
+        {
+            Vector3 smoothDirection = Vector3.SmoothDamp(currentDirection, direction, ref currentVelocity, smoothTime / 2);
+            transform.forward = smoothDirection;
+
+        }
+        else
         if (mining)
         {
             Vector3 smoothDirection = Vector3.SmoothDamp(currentDirection, direction, ref currentVelocity, smoothTime + 2);
@@ -152,6 +193,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Died();
         if (InCity() && !pick)
         {
             pick = true;

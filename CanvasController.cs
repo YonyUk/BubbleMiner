@@ -17,16 +17,45 @@ public class CanvasController : MonoBehaviour
 
     public TextMeshProUGUI drillText;
 
+    public TextMeshProUGUI Happy;
+    public TextMeshProUGUI Population;
+    public TextMeshProUGUI Oxygen;
+    public TextMeshProUGUI Food;
+    public TextMeshProUGUI Mine;
+
+    public TextMeshProUGUI Day;
+    public TextMeshProUGUI Time;
+
+    public GameObject cityInfo;
+
     // Start is called before the first frame update
     void Start()
     {
 
     }
-
+    void PrintCity()
+    {
+        Happy.text = "%";
+        Population.text = 30 + "";
+        Oxygen.text = 10 + "/" + 20;
+        foodText.text = 10 + "/" + 20;
+        Mine.text = 10 + "/" + 20;
+        Day.text = "Day " + 1;
+        string s = "" + 300 % 60;
+        if (s.Length < 2)
+        {
+            string a = "0" + s;
+            s = a;
+        }
+        Time.text = Mathf.Round(300 / 60) + ":" + s;
+    }
     // Update is called once per frame
     void Update()
     {
+
         SetSliderValue();
+        PrintCity();
+        cityInfo.SetActive(player.InCity());
         switch (player.gunIndex)
         {
             case 0: bubV.SetActive(true); foodV.SetActive(false); mineV.SetActive(false); break;
