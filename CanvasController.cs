@@ -11,6 +11,12 @@ public class CanvasController : MonoBehaviour
     public GameObject foodV;
     public GameObject mineV;
     public TextMeshProUGUI oxiText;
+    public TextMeshProUGUI oxyText;
+
+    public TextMeshProUGUI foodText;
+
+    public TextMeshProUGUI drillText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +34,9 @@ public class CanvasController : MonoBehaviour
             case 2: bubV.SetActive(false); foodV.SetActive(false); mineV.SetActive(true); break;
 
         }
+        oxyText.text = "" + player.oxygenStorage;
+        foodText.text = "" + player.foodStorage;
+        drillText.text = "" + player.drillStorage;
     }
     void SetSliderValue()
     {

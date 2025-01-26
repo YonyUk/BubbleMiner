@@ -15,6 +15,8 @@ public class Movement : MonoBehaviour
     public Drill drill;
     public bool shooting;
     public int oxygenStorage = 0;
+    public int foodStorage = 0;
+    public int drillStorage = 0;
     public Animator anim;
     [HideInInspector]
     public bool moving;
@@ -48,13 +50,13 @@ public class Movement : MonoBehaviour
             }
         }
     }
-    private void UpdateOxygenStorage()
+    private void UpdateStorage()
     {
-        if (gun is BubbleCollector)
-        {
-            BubbleCollector bubbleGun = (BubbleCollector)gun;
-            oxygenStorage = bubbleGun.occupied;
-        }
+
+        oxygenStorage = BbGun.occupied;
+        drillStorage = drill.occupied;
+
+
     }
     private bool InCity()
     {
@@ -160,7 +162,7 @@ public class Movement : MonoBehaviour
             pick = false;
         }
         SwitchGun();
-        UpdateOxygenStorage();
+        UpdateStorage();
         Oxigen();
         Mining();
         Move();
@@ -175,6 +177,12 @@ public class Movement : MonoBehaviour
             other.GetComponent<harpoonBar>().get();
             harpoon.loaded = true;
             harpoon.flag = false;
+        }
+        if (other.CompareTag(Globals.foodTag))
+        {
+            foodStorage += other.GetComponent<Meat>().unit;
+            Destroy(other.gameObject);
+
         }
     }
 }

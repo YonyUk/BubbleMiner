@@ -57,7 +57,7 @@ public class Harpoon : MonoBehaviour, IEqquipable
             rb.isKinematic = false;
             transform.GetChild(0).SetParent(null);
 
-            rb.AddForce(player.transform.forward * 15, ForceMode.Impulse);
+            rb.AddForce(player.transform.forward * 25, ForceMode.Impulse);
             flag = true;
             rb = null;
 

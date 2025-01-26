@@ -13,7 +13,7 @@ public class BubbleCollector : MonoBehaviour, IEqquipable
     public int storage { get; private set; }
     public int occupied { get; set; } = 0;
     public bool canUse;
-    float secondsToCollect;
+    int collectPerSeconds = 1;
     GameObject target;
     float collectDelay = 0f;
 
@@ -21,19 +21,14 @@ public class BubbleCollector : MonoBehaviour, IEqquipable
     public void Upgrade()
     {
         storage += 4;
-        secondsToCollect -= 2;
+        collectPerSeconds++;
     }
 
     public void Use()
     {
         if (canUse)
         {
-            if (collectDelay <= secondsToCollect)
-            {
-                collectDelay += Time.deltaTime;
-            }
-
-
+            collectDelay += Time.deltaTime;
         }
     }
     void OnTriggerEnter(Collider other)
@@ -57,10 +52,9 @@ public class BubbleCollector : MonoBehaviour, IEqquipable
 
         }
     }
-    void OnEnable()
+    void Start()
     {
         storage = Globals.bubbleStorageCapacity;
-        secondsToCollect = 8;
     }
 
     // Update is called once per frame
@@ -68,17 +62,26 @@ public class BubbleCollector : MonoBehaviour, IEqquipable
     {
         if (target)
         {
-            if (target.GetComponent<Plants>().Oxygen != null && collectDelay > 4.5f)
+            if (target.GetComponent<Plants>().Oxygen != null && collectDelay > 1.5f && collectDelay > 0)
             {
+                collectDelay = 0;
                 target.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
                 target.gameObject.transform.GetChild(0).GetComponent<OxygenPartManager>().flag = false;
-                occupied = Math.Min(target.GetComponent<Plants>().Oxygen.Units + occupied, storage);
-                collectDelay = 0;
-                target.GetComponent<Plants>().Oxygen = null;
+
+                Debug.Log("te amo idania");
+                if (occupied < storage)
+                {
+                    occupied += collectPerSeconds;
+                    if (target.GetComponent<Plants>().Oxygen.Units > 0) target.GetComponent<Plants>().Oxygen = new Oxigen(target.GetComponent<Plants>().Oxygen.Units - 1);
+                    else target.GetComponent<Plants>().Oxygen = null;
+                }
+
+
 
             }
 
         }
 
+        else collectDelay = 0;
     }
 }
