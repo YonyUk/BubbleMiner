@@ -5,7 +5,7 @@ using Resources = Architecture.Resource.Resources;
 using Variables;
 public class AlmacenDeBurbujas : MonoBehaviour, IStructure<Oxigen>
 {
-    public Resources Material {get;}
+	public Resources Material { get; private set; }
     int quantity = 0;
     int maxquantity = 20;
     int cont = 0;

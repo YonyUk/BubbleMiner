@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.ShaderGraph;
-using UnityEngine.InputSystem;
+//using UnityEditor.ShaderGraph;
+//using UnityEngine.InputSystem;
 using Architecture.Structures;
 using Architecture.Resource;
 public class SpawnStructure : MonoBehaviour
@@ -31,7 +31,7 @@ public class SpawnStructure : MonoBehaviour
         if(Input.GetKey(KeyCode.C) && FlagCollider){
             GameObject g = GetStruct(index = IndexStruct());
             this.GetComponentInParent<City>().structures.Add(g.GetComponent<IStructure<IResource>>());
-            Instantiate(g,transform);
+            Instantiate(g,transform.position,Quaternion.identity);
         }
     }
     GameObject GetStruct(int x)

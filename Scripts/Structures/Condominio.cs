@@ -5,7 +5,9 @@ using Variables;
 
 public class Condominio : MonoBehaviour, IStructure<People>
 {
-    public Architecture.Resource.Resources Material =>Architecture.Resource.Resources.People;
+	public Architecture.Resource.Resources Material{
+		get { return Architecture.Resource.Resources.People; }
+	}
     int quantity =0;
     bool CanProduce = true;
     int cont = 0;

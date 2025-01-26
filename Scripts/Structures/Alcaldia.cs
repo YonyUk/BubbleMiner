@@ -7,7 +7,9 @@ using Variables;
 
 public class Alcaldia : MonoBehaviour, IStructure<Satisfaction>
 {
-    public Resources Material =>GetResources();
+	public Resources Material{
+		get{ return GetResources();}
+	}
     Resources[] materials;
     int [] quantity;
     int maxquantity = 20;

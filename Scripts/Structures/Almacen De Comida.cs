@@ -2,10 +2,12 @@ using UnityEngine;
 using Architecture.Structures;
 using Architecture.Resource;
 using Variables;
-using Unity.VisualScripting;
+//using Unity.VisualScripting;
 public class AlmacenDeComida : MonoBehaviour, IStructure<Food>
 {
-    public Architecture.Resource.Resources Material => Architecture.Resource.Resources.Food;
+	public Architecture.Resource.Resources Material{
+		get { return Architecture.Resource.Resources.Food; }
+	}
     int quantity = 0;
     int maxquantity = 20;
     bool CanProduce = true;

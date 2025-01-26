@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Architecture.Structures;
-using Unity.VisualScripting;
+//using Unity.VisualScripting;
 using UnityEngine;
 using Variables;
 using IResource = Architecture.Resource.IResource;
@@ -9,18 +9,18 @@ using Resources = Architecture.Resource.Resources;
 public class City : MonoBehaviour
 {
     public List<GameObject> StructPrefabs;
-    public AlmacenDeBurbujas almacenDeBurbujas;
-    public AlmacenDeComida almacenDeComida;
-    public Alcaldia alcaldia;
-    public Condominio condo;
     public List<IStructure<IResource>> structures;
+	Alcaldia alcaldia { get; set; }
     Dictionary<IResource,int>materials;
     void Start()
     {
+		structures = new List<IStructure<IResource>> ();
         materials = new Dictionary<IResource, int>();
         int radius = 0;
         int angle = 0;
         int cont = 0;
+		alcaldia = ((GameObject)Instantiate (StructPrefabs [0], new Vector3 (), Quaternion.identity)).GetComponent<Alcaldia>();
+
         while(cont < 12)
         {
             AddSpawnZone(angle,radius);
@@ -62,6 +62,6 @@ public class City : MonoBehaviour
         s.PrefabsStructs = StructPrefabs;
         s.angle = angle;
         s.radius = radius;
-        Instantiate(g,transform);
+        Instantiate(g,transform.position,Quaternion.identity);
     }
 }
