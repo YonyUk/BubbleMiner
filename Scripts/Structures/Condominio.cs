@@ -3,7 +3,7 @@ using Architecture.Structures;
 using UnityEngine;
 using Variables;
 
-public class Condominio : MonoBehaviour, IStructure<People>
+public class Condominio : MonoBehaviour, IStructure
 {
 	public Architecture.Resource.Resources Material{
 		get { return Architecture.Resource.Resources.People; }
@@ -18,7 +18,7 @@ public class Condominio : MonoBehaviour, IStructure<People>
         }
     }
 
-    public People Produce()
+    public void Produce(System.Action<Architecture.Resource.Resources,int> action)
     {
         int produced = 0;
         if(CanProduce)
@@ -32,7 +32,7 @@ public class Condominio : MonoBehaviour, IStructure<People>
             }
 
         }
-        return new People(produced);
+        action (Architecture.Resource.Resources.People,produced);
     }
     void FixedUpdate()
     {

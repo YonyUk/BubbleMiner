@@ -3,7 +3,7 @@ using Architecture.Structures;
 using Architecture.Resource;
 using Resources = Architecture.Resource.Resources;
 using Variables;
-public class AlmacenDeBurbujas : MonoBehaviour, IStructure<Oxigen>
+public class AlmacenDeBurbujas : MonoBehaviour, IStructure
 {
 	public Resources Material { get; private set; }
     int quantity = 0;
@@ -20,7 +20,7 @@ public class AlmacenDeBurbujas : MonoBehaviour, IStructure<Oxigen>
         }
     }
 
-    public Oxigen Produce()
+    public void Produce(System.Action<Resources,int> action)
     {
         int produceOxygen = 0;
         if(CanProduce)
@@ -32,7 +32,7 @@ public class AlmacenDeBurbujas : MonoBehaviour, IStructure<Oxigen>
                 CanProduce = false;
             }
         }
-        return new Oxigen(produceOxygen);
+        action (Resources.Oxygen,produceOxygen);
     }
     void FixedUpdate() {
         cont++;

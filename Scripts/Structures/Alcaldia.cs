@@ -5,7 +5,7 @@ using Resources = Architecture.Resource.Resources;
 using System;
 using Variables;
 
-public class Alcaldia : MonoBehaviour, IStructure<Satisfaction>
+public class Alcaldia : MonoBehaviour, IStructure
 {
 	public Resources Material{
 		get{ return GetResources();}
@@ -26,7 +26,7 @@ public class Alcaldia : MonoBehaviour, IStructure<Satisfaction>
         }
     }
 
-    public Satisfaction Produce()
+    public void Produce(System.Action<Resources,int> action)
     {
         int formulaSatisfaccion = 0;
         if(CanProduce){
@@ -35,7 +35,7 @@ public class Alcaldia : MonoBehaviour, IStructure<Satisfaction>
             quantity[1] -= formulaSatisfaccion*quantity[2];
             CanProduce = false;
         }
-        return new Satisfaction(formulaSatisfaccion);
+		action (Resources.Satisfaccion,formulaSatisfaccion);
     }
     private Resources GetResources(){
         int iter =-1;
@@ -51,7 +51,7 @@ public class Alcaldia : MonoBehaviour, IStructure<Satisfaction>
     void Start()
     {
         materials = new[] {Resources.Oxygen , Resources.Food, Resources.People};
-        quantity = new[] {0,0,0};
+        quantity = new[] {1,1,1};
     }
     void FixedUpdate()
     {

@@ -3,7 +3,7 @@ using Architecture.Structures;
 using Architecture.Resource;
 using Variables;
 //using Unity.VisualScripting;
-public class AlmacenDeComida : MonoBehaviour, IStructure<Food>
+public class AlmacenDeComida : MonoBehaviour, IStructure
 {
 	public Architecture.Resource.Resources Material{
 		get { return Architecture.Resource.Resources.Food; }
@@ -22,7 +22,7 @@ public class AlmacenDeComida : MonoBehaviour, IStructure<Food>
         }
     }
 
-    public Food Produce()
+    public void Produce(System.Action<Architecture.Resource.Resources,int> action)
     {
         int produced = 0;
         if(CanProduce)
@@ -34,7 +34,7 @@ public class AlmacenDeComida : MonoBehaviour, IStructure<Food>
                 CanProduce = false;
             }
         }
-        return new Food(produced);
+		action (Architecture.Resource.Resources.Food,produced);
     }
     void FixedUpdate() {
         cont++;

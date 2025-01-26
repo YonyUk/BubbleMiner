@@ -30,7 +30,7 @@ public class SpawnStructure : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.C) && FlagCollider){
             GameObject g = GetStruct(index = IndexStruct());
-            this.GetComponentInParent<City>().structures.Add(g.GetComponent<IStructure<IResource>>());
+            this.GetComponentInParent<City>().structures.Add(g.GetComponent<IStructure>());
             Instantiate(g,transform.position,Quaternion.identity);
         }
     }

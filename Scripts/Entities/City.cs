@@ -9,18 +9,18 @@ using Resources = Architecture.Resource.Resources;
 public class City : MonoBehaviour
 {
     public List<GameObject> StructPrefabs;
-    public List<IStructure<IResource>> structures;
+    public List<IStructure> structures;
 	Alcaldia alcaldia { get; set; }
     Dictionary<IResource,int>materials;
     void Start()
     {
-		structures = new List<IStructure<IResource>> ();
+		structures = new List<IStructure> ();
         materials = new Dictionary<IResource, int>();
         int radius = 0;
         int angle = 0;
         int cont = 0;
 		alcaldia = ((GameObject)Instantiate (StructPrefabs [0], new Vector3 (), Quaternion.identity)).GetComponent<Alcaldia>();
-
+		structures.Add (alcaldia);
         while(cont < 12)
         {
             AddSpawnZone(angle,radius);
@@ -29,7 +29,10 @@ public class City : MonoBehaviour
             cont++;
         }
     }
-
+	void Meeting(Architecture.Resource.Resources type,int units){
+		Debug.Log(type);
+		Debug.Log (units);
+	}
     void Update()
     {
         foreach(var i in materials){
@@ -40,8 +43,8 @@ public class City : MonoBehaviour
             }
         }
         foreach(var i in structures){
-            var x = i.Produce();
-            materials[x] ++;
+            i.Produce(Meeting);
+            //materials[x] ++;
         }
     }
     public Satisfaction GetPoblationalHappiness(){
