@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Architecture.Structures;
 using Unity.Burst.Intrinsics;
+using Unity.VisualScripting;
+
 
 //using Unity.VisualScripting;
 using UnityEngine;
@@ -16,7 +18,6 @@ public class City : MonoBehaviour
     AlmacenDeBurbujas burbujas {get;set;}
     AlmacenDeComida almacenDeComida{get;set;}
     Condominio condominio {get;set;}
-    Dictionary<IResource,int>materials;
     public int oxigen = 20;
     public int satisfaction = 100;
     public int food=20;
@@ -24,7 +25,6 @@ public class City : MonoBehaviour
     void Start()
     {
 		structures = new List<IStructure> ();
-        materials = new Dictionary<IResource, int>();
         int radius = 0;
         int angle = 0;
         int cont = 0;
@@ -63,20 +63,6 @@ public class City : MonoBehaviour
                 return;
         }
 	}
-    void Update()
-    {
-        foreach(var i in materials){
-            if(structures[0].Material == i.Key.Type && i.Value > 0){
-                structures[0].AddResource(i.Key);
-                if(i.Value == 1)materials.Remove(i.Key);
-                else materials[i.Key]--;
-            }
-        }
-        foreach(var i in structures){
-            i.Produce(GetParams);
-            //materials[x] ++;
-        }
-    }
 
     public void NextDay()
     {
@@ -84,18 +70,9 @@ public class City : MonoBehaviour
             food -= people;
             satisfaction -= people;
             structures[4].AddResource(new People(people));
-            structures[4].Produce(GetParams);
-    }
-    public Satisfaction GetPoblationalHappiness(){
-        int n = 0;
-        foreach (var item in materials)
-        {
-            if(item.Key.Type == Resources.Satisfaccion){
-                n += item.Key.Units*item.Value;
-                materials.Remove(item.Key);
-            }
+            foreach(var i in structures){
+            i.Produce(GetParams);
         }
-        return new Satisfaction(n);
     }
     public void AddSpawnZone(int angle, int radius){
         GameObject g = new GameObject();
@@ -105,5 +82,10 @@ public class City : MonoBehaviour
         s.angle = angle;
         s.radius = radius;
         Instantiate(g,transform.position,Quaternion.identity);
+    }
+    void ManageStorage(int oxygen,int food)
+    {
+        structures[1].AddResource(new Oxigen(oxygen));
+        structures[2].AddResource(new Food(food));
     }
 }
