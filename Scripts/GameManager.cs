@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
             obj.Add(new List<GameObject>());
             for (int j = 0; j < 100; j++)
             {
-                grid[i].Add(new Vector3(i * 5, 0, j * 5));
+                grid[i].Add(new Vector3(i * 5 - 250, 0, j * 5 - 250));
                 obj[i].Add(Instantiate(new GameObject(), grid[i][j], Quaternion.identity));
             }
         }
@@ -100,9 +100,9 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.InGame;
         Mapear();
-        generator = new Generator(100, 100, 4, 5, 0.5f);
+        generator = new Generator(100, 100, 4, 2, 0.17f);
         generator.Generate();
-        generator.ClearInRange(new Vector2(50, 50), 10);
+        generator.ClearInRange(new Vector2(50, 50), 13);
         Map = generator.Map;
         DrawMaze();
     }
