@@ -28,6 +28,7 @@ public class CanvasController : MonoBehaviour
     public TextMeshProUGUI Time;
 
     public GameObject cityInfo;
+    public City city;
 
     // Start is called before the first frame update
     void Start()
@@ -35,19 +36,21 @@ public class CanvasController : MonoBehaviour
     }
     void PrintCity()
     {
-        Happy.text = "%";
-        Population.text = 30 + "";
-        Oxygen.text = 10 + "/" + 20;
-        foodText.text = 10 + "/" + 20;
-        Mine.text = 10 + "/" + 20;
-        Day.text = "Day " + 1;
-        string s = "" + 300 % 60;
+
+        Happy.text = city.satisfaction / city.people * 100 + "%";
+        Population.text = city.people + "";
+        Oxygen.text = city.oxigen + "";
+        Food.text = city.food + "";
+        Mine.text = 100 + "";
+        Day.text = "Day " + GameManager.instance.currentDay;
+
+        string s = "" + (int)((120 - (int)GameManager.instance.counter) % 60);
         if (s.Length < 2)
         {
             string a = "0" + s;
             s = a;
         }
-        Time.text = Mathf.Round(300 / 60) + ":" + s;
+        Time.text = (int)((120 - (int)GameManager.instance.counter) / 60) + ":" + s;
     }
     // Update is called once per frame
     void Update()

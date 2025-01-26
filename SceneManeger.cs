@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SceneManeger : MonoBehaviour
 {
-    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,8 +16,5 @@ public class SceneManeger : MonoBehaviour
     {
 
     }
-    public void Star()
-    {
-        anim.SetTrigger("start");
-    }
+
 }

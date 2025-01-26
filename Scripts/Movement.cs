@@ -30,6 +30,7 @@ public class Movement : MonoBehaviour
     public float MultiOxigen = 1;
     bool pick;
     public LayerMask layer;
+    public City city;
     void Awake()
     {
 
@@ -80,7 +81,7 @@ public class Movement : MonoBehaviour
             oxygenStorage = 0;
             foodStorage = 0;
             drillStorage = 0;
-            oxigen = 1;
+            oxigen = 0.98f;
         }
 
     }
@@ -197,9 +198,10 @@ public class Movement : MonoBehaviour
         if (InCity() && !pick)
         {
             pick = true;
+
             hbar.get();
         }
-        else if (InCity())
+        else if (!InCity())
         {
             pick = false;
         }
@@ -207,7 +209,8 @@ public class Movement : MonoBehaviour
         UpdateStorage();
         Oxigen();
         Mining();
-        Move();
+        if (GameManager.instance.start)
+            Move();
         LookAtCursor();
         AnimationHandler();
     }

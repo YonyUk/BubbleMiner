@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class Food : MonoBehaviour, IResource
 {
-    public Architecture.Resource.Resources Type => Architecture.Resource.Resources.Food;
+	public Architecture.Resource.Resources Type {
+		get{ return Architecture.Resource.Resources.Food; }
+	}
 
-    public int Units => unit;
+	public int Units{
+		get{ return unit;}
+	}
 
     int unit;
     public Food(int unit){

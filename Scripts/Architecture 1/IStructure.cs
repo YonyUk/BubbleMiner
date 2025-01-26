@@ -3,10 +3,10 @@ using Architecture.Resource;
 using Resources = Architecture.Resource.Resources;
 
 namespace Architecture.Structures{
-    public interface IStructure<T>
+    public interface IStructure
     {
         Resources Material{get; }
-        T Produce();
+		void Produce(System.Action<Resources,int> action);
         void AddResource(IResource resource);
     }
 }

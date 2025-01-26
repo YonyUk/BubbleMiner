@@ -7,8 +7,10 @@ using GameStates;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
     public int currentDay = 0;
     public float counter = 0;
+
     public GameObject city;
     public GameObject fish;
     public List<Transform> cardumenPos;
@@ -16,8 +18,11 @@ public class GameManager : MonoBehaviour
     List<List<Vector3>> grid = new List<List<Vector3>>();
     List<List<GameObject>> obj = new List<List<GameObject>>();
     public List<GameObject> Instantiables = new List<GameObject>();//0//corales//
+    public GameObject win;
+    public GameObject lose;
     Generator generator;
-
+    public Animator anim;
+    public bool start = false;
     int[,] Map;
     public void Mapear()
     {
@@ -70,12 +75,16 @@ public class GameManager : MonoBehaviour
     }
     private void DayTiming()
     {
-        counter += Time.deltaTime;
-        if (counter >= 300f)
+        if (counter >= 120f)
         {
             currentDay++;
-            // city.GetComponent<City>().NextDay();
+            city.GetComponent<City>().NextDay();
             counter = 0;
+        }
+        else
+        {
+            counter += Time.deltaTime;
+
         }
     }
 
@@ -83,10 +92,12 @@ public class GameManager : MonoBehaviour
     {
         if (gameState == GameState.Win)
         {
+            win.SetActive(true);
             //codigo que se ejecuta al ganar el juego
         }
         else if (gameState == GameState.Lose)
         {
+            lose.SetActive(true);
             //codigo que se ejecuta al perder el juego
         }
     }
@@ -108,21 +119,26 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        if (counter == 0) DayTiming();
+        if (start)
+            DayTiming();
         if (currentDay == Globals.daysToWin)
         {
             gameState = GameState.Win;
             FinishGame();
         }
-        // if (city.GetComponent<City>().satisfaction <= Globals.satisfactionBreakPoint)
-        // {
-        //     gameState = GameState.Lose;
-        //     FinishGame();
-        // }
+        if (city.GetComponent<City>().satisfaction <= Globals.satisfactionBreakPoint)
+        {
+            gameState = GameState.Lose;
+            FinishGame();
+        }
 
 
     }
-
+    public void Star()
+    {
+        anim.SetTrigger("start");
+        start = true;
+    }
 }
 
 

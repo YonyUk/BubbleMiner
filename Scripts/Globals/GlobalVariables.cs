@@ -26,6 +26,10 @@ namespace Variables
         public static int daysToWin = 15;
         public static int satisfactionBreakPoint = 5;
         public static int time_bettwen_attack = 5;
+
+        public static int PeopleProduceControle = 6;
+        public static int RefreshStructureProduce = 10000;
+        public static int VectorNormalizer = 10;
     }
 
 }

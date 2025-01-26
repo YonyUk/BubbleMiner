@@ -1,16 +1,17 @@
+using Architecture.Resource;
 using UnityEngine;
 
-public class People : MonoBehaviour
+public class People : MonoBehaviour, IResource
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+	public Architecture.Resource.Resources Type{
+		get { return Architecture.Resource.Resources.People; }
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+	public int Units{
+		get{ return unit; }
+	}
+    int unit;
+    public People(int unit){
+        this.unit = unit;
     }
 }
