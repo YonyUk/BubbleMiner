@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
 public class CanvasController : MonoBehaviour
 {
     public Movement player;
@@ -31,7 +32,6 @@ public class CanvasController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
     }
     void PrintCity()
     {

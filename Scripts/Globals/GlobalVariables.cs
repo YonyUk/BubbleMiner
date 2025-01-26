@@ -23,7 +23,8 @@ namespace Variables
         public static int explore_range = 25;
         public static float min_distance_to_contact = 5f;
         public static float max_distance_to_contact = 5f;
-
+        public static int daysToWin = 15;
+        public static int satisfactionBreakPoint = 5;
         public static int time_bettwen_attack = 5;
     }
 
