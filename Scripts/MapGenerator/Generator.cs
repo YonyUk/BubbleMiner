@@ -104,5 +104,13 @@ namespace Generators{
 		public void Restart(){
 			iterations = 0;
 		}
+		public bool ClearInRange(Vector2 pos, int radious){
+			if (pos.x - radious < 0 || pos.x + radious > rows - 1 || pos.y - radious < 0 || pos.y + radious > cols - 1)
+				return false;
+			for (int i = (int)pos.x - radious; i < pos.x + radious; i++)
+				for (int j = (int)pos.y - radious; j < pos.y + radious; j++)
+					map [i, j] = 0;
+			return true;
+		}
 	}
 }
