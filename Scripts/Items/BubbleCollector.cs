@@ -16,7 +16,7 @@ public class BubbleCollector : MonoBehaviour, IEqquipable
     int collectPerSeconds = 1;
     GameObject target;
     float collectDelay = 0f;
-
+    public AudioSource bb;
 
     public void Upgrade()
     {
@@ -28,6 +28,8 @@ public class BubbleCollector : MonoBehaviour, IEqquipable
     {
         if (canUse)
         {
+            if (!bb.isPlaying)
+                bb.Play();
             collectDelay += Time.deltaTime;
         }
     }
@@ -68,7 +70,6 @@ public class BubbleCollector : MonoBehaviour, IEqquipable
                 target.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
                 target.gameObject.transform.GetChild(0).GetComponent<OxygenPartManager>().flag = false;
 
-                Debug.Log("te amo idania");
                 if (occupied < storage)
                 {
                     occupied += collectPerSeconds;

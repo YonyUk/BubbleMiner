@@ -37,20 +37,20 @@ public class CanvasController : MonoBehaviour
     void PrintCity()
     {
 
-        Happy.text = city.satisfaction / city.people * 100 + "%";
+        Happy.text = (Mathf.Min(city.food, city.oxigen) / city.GetComponent<City>().people) * 100 + "%";
         Population.text = city.people + "";
         Oxygen.text = city.oxigen + "";
         Food.text = city.food + "";
         Mine.text = 100 + "";
         Day.text = "Day " + GameManager.instance.currentDay;
 
-        string s = "" + (int)((120 - (int)GameManager.instance.counter) % 60);
+        string s = "" + (int)((180 - (int)GameManager.instance.counter) % 60);
         if (s.Length < 2)
         {
             string a = "0" + s;
             s = a;
         }
-        Time.text = (int)((120 - (int)GameManager.instance.counter) / 60) + ":" + s;
+        Time.text = (int)((180 - (int)GameManager.instance.counter) / 60) + ":" + s;
     }
     // Update is called once per frame
     void Update()

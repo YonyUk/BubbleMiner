@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 public class Movement : MonoBehaviour
 {
     public static Movement mov;
-
+    public AudioSource bub;
     public IEqquipable gun;
     public int gunIndex = 0;
     public harpoonBar hbar;
@@ -81,6 +81,7 @@ public class Movement : MonoBehaviour
             oxygenStorage = 0;
             foodStorage = 0;
             drillStorage = 0;
+            GameManager.instance.NextDayOnFaint();
             oxigen = 0.98f;
         }
 
@@ -136,6 +137,11 @@ public class Movement : MonoBehaviour
         if (mining)
         {
             gun.Use();
+
+        }
+        else
+        {
+            bub.Stop();
         }
     }
     private void LookAtCursor()

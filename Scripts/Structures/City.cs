@@ -74,10 +74,6 @@ public class City : MonoBehaviour
         if (satisfaction >= people) satisfaction -= people;
         else satisfaction = 0;
         structures[3].AddResource(new People(people));
-        foreach (var i in structures)
-        {
-            i.Produce(GetParams);
-        }
     }
     public void AddSpawnZone(int angle, int radius)
     {
@@ -93,5 +89,9 @@ public class City : MonoBehaviour
     {
         structures[1].AddResource(new Oxigen(oxygen));
         structures[2].AddResource(new Food(food));
+        foreach (var i in structures)
+        {
+            i.Produce(GetParams);
+        }
     }
 }

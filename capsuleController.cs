@@ -26,8 +26,9 @@ public class capsuleController : MonoBehaviour
             playerIn = true;
             print("enter");
             city.ManageStorage(player.oxygenStorage, player.foodStorage);
-            player.oxygenStorage = 0;
+            player.BbGun.occupied = 0;
             player.foodStorage = 0;
+
         }
     }
     void OnTriggerExit(Collider other)

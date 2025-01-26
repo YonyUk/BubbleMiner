@@ -7,7 +7,8 @@ using GameStates;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
+    public GameObject peces;
+    public GameObject pecesD;
     public int currentDay = 0;
     public float counter = 0;
 
@@ -70,15 +71,19 @@ public class GameManager : MonoBehaviour
     }
     public void NextDayOnFaint()
     {
-        counter = 0;
         currentDay++;
+        city.GetComponent<City>().NextDay();
+        counter = 0;
     }
     private void DayTiming()
     {
-        if (counter >= 120f)
+        if (counter >= 180f)
         {
             currentDay++;
             city.GetComponent<City>().NextDay();
+            Destroy(pecesD);
+            Instantiate(peces, new Vector3(25.9799995f, 1.49000001f, 57.2190018f), Quaternion.identity);
+            pecesD = peces;
             counter = 0;
         }
         else
@@ -126,7 +131,7 @@ public class GameManager : MonoBehaviour
             gameState = GameState.Win;
             FinishGame();
         }
-        if (city.GetComponent<City>().satisfaction <= Globals.satisfactionBreakPoint)
+        if ((Mathf.Min(city.GetComponent<City>().food, city.GetComponent<City>().oxigen) / city.GetComponent<City>().people) * 100 <= Globals.satisfactionBreakPoint)
         {
             gameState = GameState.Lose;
             FinishGame();
